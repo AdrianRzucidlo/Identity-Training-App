@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Identity_Training_App.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -10,5 +11,6 @@ namespace Identity_Training_App.Data
         {
 
         }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }
