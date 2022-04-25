@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
