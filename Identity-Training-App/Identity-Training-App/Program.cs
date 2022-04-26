@@ -1,6 +1,7 @@
 using Identity_Training_App.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -8,11 +9,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+builder.Services.AddMvc();
 // Add services to the container.
 
 // Add services to the container.
 var app = builder.Build();
+
 
 
 
@@ -29,6 +31,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
