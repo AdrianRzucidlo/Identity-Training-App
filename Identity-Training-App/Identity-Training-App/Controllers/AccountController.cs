@@ -60,5 +60,13 @@ namespace Identity_Training_App.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logoff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
     }
 }
