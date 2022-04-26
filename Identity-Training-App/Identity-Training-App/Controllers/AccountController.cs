@@ -24,17 +24,20 @@ namespace Identity_Training_App.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(string? returnurl = null)
         {
+            ViewData["ReturnUrl"] = returnurl;
             var registerVM = new RegisterVM();
             return View(registerVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterVM model)
+        public async Task<IActionResult> Register(RegisterVM model, string returnurl = null)
         {
-            if(ModelState.IsValid)
+            ViewData["ReturnUrl"] = returnurl;
+            returnurl = returnurl ?? Url.Content("~/");
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
@@ -46,7 +49,7 @@ namespace Identity_Training_App.Controllers
                 if(result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index","Home");
+                    return LocalRedirect(returnurl);
                 }
                 AddErrors(result);
             }
@@ -67,6 +70,36 @@ namespace Identity_Training_App.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+
+        [HttpGet]
+        public IActionResult Login(string? returnurl=null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult>Login(LoginVM model,string? returnurl=null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            returnurl = returnurl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,model.RememberMe,lockoutOnFailure:false);
+                if (result.Succeeded)
+                {
+                    return LocalRedirect(returnurl);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                }
+            }
+            return View(model);
         }
     }
 }
