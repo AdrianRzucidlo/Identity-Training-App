@@ -33,7 +33,7 @@ namespace Identity_Training_App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterVM model, string returnurl = null)
+        public async Task<IActionResult> Register(RegisterVM model, string? returnurl = null)
         {
             ViewData["ReturnUrl"] = returnurl;
             returnurl = returnurl ?? Url.Content("~/");
@@ -88,10 +88,14 @@ namespace Identity_Training_App.Controllers
             returnurl = returnurl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,model.RememberMe,lockoutOnFailure:false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,model.RememberMe,lockoutOnFailure:true);
                 if (result.Succeeded)
                 {
                     return LocalRedirect(returnurl);
+                }
+                if(result.IsLockedOut)
+                {
+                    return View("Lockout");
                 }
                 else
                 {

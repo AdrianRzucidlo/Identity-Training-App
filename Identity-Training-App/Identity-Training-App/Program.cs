@@ -8,6 +8,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.Configure<IdentityOptions>(opt =>
+{
+    opt.Password.RequiredLength = 5;
+    opt.Password.RequireLowercase = true;
+    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(10);
+    opt.Lockout.MaxFailedAccessAttempts = 2;
+});
 
 builder.Services.AddMvc();
 // Add services to the container.
