@@ -105,5 +105,18 @@ namespace Identity_Training_App.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgetPasswordVM model)
+        {
+            return Content("yy");
+        }
     }
 }
