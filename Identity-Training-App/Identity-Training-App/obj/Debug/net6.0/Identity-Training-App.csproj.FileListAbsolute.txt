@@ -64,3 +64,8 @@ C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Ide
 C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\obj\Debug\net6.0\ref\Identity-Training-App.dll
 C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\obj\Debug\net6.0\Identity-Training-App.pdb
 C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\obj\Debug\net6.0\Identity-Training-App.genruntimeconfig.cache
+C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\bin\Debug\net6.0\Mailjet.Client.dll
+C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App\obj\Debug\net6.0\Identity-Training-App.MvcApplicationPartsAssemblyInfo.cs

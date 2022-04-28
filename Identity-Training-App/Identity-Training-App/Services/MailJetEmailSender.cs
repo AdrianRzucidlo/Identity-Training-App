@@ -19,54 +19,23 @@ namespace Identity_Training_App.Services
         {
             _mailJetOptions = _configuration.GetSection("MailJet").Get<MailJetOptions>();
 
-            MailjetClient client = new MailjetClient(_mailJetOptions.ApiKey,_mailJetOptions.SecretKey);
+            MailjetClient client = new MailjetClient(_mailJetOptions.ApiKey, _mailJetOptions.SecretKey);
+
             MailjetRequest request = new MailjetRequest
             {
                 Resource = Send.Resource,
             }
-             .Property(Send.Messages, new JArray {
-     new JObject {
-      {
-       "From",
-       new JObject {
-        {"Email", "aonys@op.pl"},
-        {"Name", "Adi"}
-       }
-      }, {
-       "To",
-       new JArray {
-        new JObject {
-         {
-          "Email",
-          "aonys@op.pl"
-         }, {
-          "Name",
-          "Adi"
-         }
-        }
-       }
-      }, {
-       "Subject",
-       subject
-      },  {
-       "HTMLPart",
-       htmlMessage
-      },
-     }
-             });
+                .Property(Send.FromEmail, "arzucidlo@protonmail.com")
+                .Property(Send.FromName, "Identity-test")
+                .Property(Send.Subject, subject)
+                .Property(Send.HtmlPart, htmlMessage)
+                .Property(Send.Recipients, new JArray {
+                    new JObject {
+                        {"Email", email}
+                    }
+                });
+
             MailjetResponse response = await client.PostAsync(request);
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    Console.WriteLine(string.Format("Total: {0}, Count: {1}\n", response.GetTotal(), response.GetCount()));
-            //    Console.WriteLine(response.GetData());
-            //}
-            //else
-            //{
-            //    Console.WriteLine(string.Format("StatusCode: {0}\n", response.StatusCode));
-            //    Console.WriteLine(string.Format("ErrorInfo: {0}\n", response.GetErrorInfo()));
-            //    Console.WriteLine(response.GetData());
-            //    Console.WriteLine(string.Format("ErrorMessage: {0}\n", response.GetErrorMessage()));
-            //}
         }
     }
 }

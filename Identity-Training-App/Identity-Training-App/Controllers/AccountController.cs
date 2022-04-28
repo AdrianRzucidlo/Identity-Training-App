@@ -1,6 +1,7 @@
 ﻿using Identity_Training_App.Models;
 using Identity_Training_App.Models.View_Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity_Training_App.Controllers
@@ -9,11 +10,13 @@ namespace Identity_Training_App.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IEmailSender _emailSender;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
 
 
@@ -107,6 +110,12 @@ namespace Identity_Training_App.Controllers
         }
 
         [HttpGet]
+        public IActionResult ForgotPasswordConfirm()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
@@ -116,7 +125,21 @@ namespace Identity_Training_App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgetPasswordVM model)
         {
-            return Content("yy");
+            if(ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if(user == null)
+                {
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackurl = Url.Action("ResetPassword", "Account", new {userID = user.Id,code=code},protocol:HttpContext.Request.Scheme);
+                await _emailSender.SendEmailAsync(model.Email, "Reset password - Identity-Training", "Please reset your password by clicking here" +
+                    "<a href=\"" + callbackurl + "\">link</a>");
+                return RedirectToAction("ForgotPasswordConfirm");
+            }
+            return View(model);
         }
     }
 }
