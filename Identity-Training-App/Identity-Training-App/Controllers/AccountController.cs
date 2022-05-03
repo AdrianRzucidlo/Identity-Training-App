@@ -141,5 +141,43 @@ namespace Identity_Training_App.Controllers
             }
             return View(model);
         }
+
+
+
+
+
+        //new password
+
+        [HttpGet]
+        public IActionResult NewPassword(string code=null)
+        {
+            return code==null? View("Error"): View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NewPassword(NewPasswordVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackurl = Url.Action("ResetPassword", "Account", new { userID = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                await _emailSender.SendEmailAsync(model.Email, "Reset password - Identity-Training", "Please reset your password by clicking here" +
+                    "<a href=\"" + callbackurl + "\">link</a>");
+                return RedirectToAction("ForgotPasswordConfirm");
+            }
+            return View(model);
+        }
+
+        public IActionResult ResetPasswordConfirm()
+        {
+            return View();
+        }
     }
 }

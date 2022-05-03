@@ -31,8 +31,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/NewPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxOZXdQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/ResetPasswordConfirm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkQ29uZmlybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Home/Index.cshtml]
