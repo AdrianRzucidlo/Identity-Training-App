@@ -134,7 +134,7 @@ namespace Identity_Training_App.Controllers
                 }
 
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackurl = Url.Action("ResetPassword", "Account", new {userID = user.Id,code=code},protocol:HttpContext.Request.Scheme);
+                var callbackurl = Url.Action("NewPassword", "Account", new {userID = user.Id,code=code},protocol:HttpContext.Request.Scheme);
                 await _emailSender.SendEmailAsync(model.Email, "Reset password - Identity-Training", "Please reset your password by clicking here" +
                     "<a href=\"" + callbackurl + "\">link</a>");
                 return RedirectToAction("ForgotPasswordConfirm");
@@ -154,30 +154,32 @@ namespace Identity_Training_App.Controllers
             return code==null? View("Error"): View();
         }
 
+        public IActionResult ResetPasswordConfirm()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> NewPassword(NewPasswordVM model)
+        public async Task<IActionResult> ResetPassword(NewPasswordVM model)
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
-                    return RedirectToAction("ForgotPasswordConfirmation");
+                    return RedirectToAction("ResetPasswordConfirm");
                 }
+                var result = await _userManager.ResetPasswordAsync(user, model.Code, model.NewPassword);
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("ResetPasswordConfirm");
+                }
+                AddErrors(result);
 
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackurl = Url.Action("ResetPassword", "Account", new { userID = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                await _emailSender.SendEmailAsync(model.Email, "Reset password - Identity-Training", "Please reset your password by clicking here" +
-                    "<a href=\"" + callbackurl + "\">link</a>");
-                return RedirectToAction("ForgotPasswordConfirm");
             }
             return View(model);
-        }
-
-        public IActionResult ResetPasswordConfirm()
-        {
-            return View();
         }
     }
 }
