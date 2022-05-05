@@ -7,5 +7,8 @@ namespace Identity_Training_App.Models.View_Models
         [EmailAddress]
         [Required]
         public string Email { get; set; }
+
+        [Required]
+        public string Name { get; set; }
     }
 }

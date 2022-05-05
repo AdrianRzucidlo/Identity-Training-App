@@ -224,9 +224,10 @@ namespace Identity_Training_App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ExternalLoginCallback(string returnurl = null,string remoteError = null)
+        public async Task<IActionResult> ExternalLoginCallback(string? returnurl = null,string? remoteError = null)
         {
-            if(remoteError != null)
+            returnurl = returnurl ?? Url.Content("~/");
+            if (remoteError != null)
             {
                 ModelState.AddModelError(string.Empty,$"Error from external provider: {remoteError}");
                 return View(nameof(Login));
@@ -248,8 +249,42 @@ namespace Identity_Training_App.Controllers
                 ViewData["ReturnUrl"] = returnurl;
                 ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationVM { Email = email });
+                var name = info.Principal.FindFirstValue(ClaimTypes.Name);
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationVM { Email = email , Name = name});
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationVM model,string returnurl = null)
+        {
+            returnurl = returnurl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                //get the info about the user
+                var info = await _signInManager.GetExternalLoginInfoAsync();
+                if(info==null)
+                {
+                    return View("Error");
+                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,Name=model.Name };
+                var result = await _userManager.CreateAsync(user);
+                if(result.Succeeded)
+                {
+                    result = await _userManager.AddLoginAsync(user, info);
+                    if(result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
+                        return LocalRedirect(returnurl);
+                    }
+
+                }
+                AddErrors(result);
+            }
+            ViewData["ReturnUrl"] = returnurl;
+            return View(model);
+        }
+
     }
 }

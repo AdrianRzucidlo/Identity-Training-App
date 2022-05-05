@@ -23,8 +23,8 @@ builder.Services.AddTransient<IEmailSender, MailJetEmailSender>();
 builder.Services.AddMvc();
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
-    options.AppId = "";
-    options.AppSecret = "";
+    options.AppId = "xxxxxxxxxxxxxxxxxx";
+    options.AppSecret = "xxxxxxxxxxxxxxxxxxxxxxxx";
 });
 // Add services to the container.
 
