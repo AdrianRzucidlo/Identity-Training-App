@@ -51,12 +51,32 @@ namespace Identity_Training_App.Controllers
                 var result = await _userManager.CreateAsync(user,model.Password);
                 if(result.Succeeded)
                 {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackurl = Url.Action(nameof(ConfirmEmail), "Account", new { userID = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm email - Identity-Training", "Please confirm your email by clicking here" +
+                        "<a href=\"" + callbackurl + "\">link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnurl);
                 }
                 AddErrors(result);
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId,string code)
+        {
+            if(userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if(user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return View(result.Succeeded? "ConfirmEmail" : "Error");
         }
 
         private void AddErrors(IdentityResult result)
@@ -149,7 +169,7 @@ namespace Identity_Training_App.Controllers
         //new password
 
         [HttpGet]
-        public IActionResult NewPassword(string code=null)
+        public IActionResult NewPassword(string? code=null)
         {
             return code==null? View("Error"): View();
         }
