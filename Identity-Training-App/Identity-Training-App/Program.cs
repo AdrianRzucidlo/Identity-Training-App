@@ -21,11 +21,15 @@ builder.Services.Configure<IdentityOptions>(opt =>
 builder.Services.AddTransient<IEmailSender, MailJetEmailSender>();
 
 builder.Services.AddMvc();
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = "";
+    options.AppSecret = "";
+});
 // Add services to the container.
 
 // Add services to the container.
 var app = builder.Build();
-
 
 
 
