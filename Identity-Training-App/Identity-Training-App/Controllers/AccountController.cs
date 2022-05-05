@@ -111,6 +111,15 @@ namespace Identity_Training_App.Controllers
             returnurl = returnurl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if(user == null)
+                {
+                    return View("Error");
+                }
+                if(user.EmailConfirmed == false)
+                {
+                    return View("EmailNotConfirmed");
+                }
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,model.RememberMe,lockoutOnFailure:true);
                 if (result.Succeeded)
                 {

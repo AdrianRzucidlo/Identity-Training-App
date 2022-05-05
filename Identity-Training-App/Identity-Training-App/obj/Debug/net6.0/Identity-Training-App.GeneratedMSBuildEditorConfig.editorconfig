@@ -19,6 +19,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/EmailNotConfirmed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFbWFpbE5vdENvbmZpcm1lZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
