@@ -56,7 +56,6 @@ namespace Identity_Training_App.Controllers
                     var callbackurl = Url.Action(nameof(ConfirmEmail), "Account", new { userID = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     await _emailSender.SendEmailAsync(model.Email, "Confirm email - Identity-Training", "Please confirm your email by clicking here" +
                         "<a href=\"" + callbackurl + "\">link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnurl);
                 }
                 AddErrors(result);
