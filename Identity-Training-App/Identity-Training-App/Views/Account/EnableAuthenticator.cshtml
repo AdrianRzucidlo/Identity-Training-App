@@ -1,0 +1,16 @@
+﻿@model Identity_Training_App.Models.View_Models.TwoFactorAuthenticationViewModel
+
+<p>
+    Please enter the code below in your authenticator app.
+</p>
+<p>
+    @Model.Token
+</p>
+
+<form method='post' asp-action="EnableAuthenticator" asp-controller="Account">
+    <input hidden asp-for="Token" />
+    <div class="form-group">
+        Enter code: <input type="text" class="form-control" asp-for=Code />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
