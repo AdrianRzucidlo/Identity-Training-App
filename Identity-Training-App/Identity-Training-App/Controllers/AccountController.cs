@@ -284,6 +284,12 @@ namespace Identity_Training_App.Controllers
             ViewData["ReturnUrl"] = returnurl;
             return View(model);
         }
+        //authenticator
+
+        public async Task<IActionResult>EnableAuthenticator()
+        {
+
+        }
 
     }
 }
