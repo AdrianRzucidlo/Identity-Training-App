@@ -288,7 +288,9 @@ namespace Identity_Training_App.Controllers
 
         public async Task<IActionResult>EnableAuthenticator()
         {
-
+            var user = await _userManager.GetUserAsync(User);
+            await _userManager.ResetAuthenticatorKeyAsync(user);
+            var token = _userManager.GetAuthenticatorKeyAsync(user);
         }
 
     }
