@@ -129,6 +129,10 @@ namespace Identity_Training_App.Controllers
                 {
                     return View("Lockout");
                 }
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToAction(nameof(VerifyAuthenticatorCode), new { returnurl, model.RememberMe });
+                }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
