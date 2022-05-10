@@ -9,10 +9,11 @@
 <p> Or scan the below QRCode with your app.</p>
 <div id="qrCode"></div>
 
-<form method='post' asp-action="EnableAuthenticator" asp-controller="Account">
+<form method="post" asp-action="EnableAuthenticator" asp-controller="Account">
     <input hidden asp-for="Token" />
+    <input hidden asp-for="QRCodeUrl" />
     <div class="form-group">
-        Enter code: <input type="text" class="form-control" asp-for=Code />
+        Enter code: <input type="text" class="form-control" asp-for="Code" />
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

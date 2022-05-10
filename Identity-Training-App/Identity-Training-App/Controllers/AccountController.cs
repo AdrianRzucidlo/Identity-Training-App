@@ -124,6 +124,10 @@ namespace Identity_Training_App.Controllers
                     return View("EmailNotConfirmed");
                 }
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,model.RememberMe,lockoutOnFailure:true);
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToAction("VerifyAuthenticatorCode", new { rememberMe = model.RememberMe, returnUrl = returnurl });
+                }
                 if (result.Succeeded)
                 {
                     return LocalRedirect(returnurl);
@@ -131,10 +135,6 @@ namespace Identity_Training_App.Controllers
                 if(result.IsLockedOut)
                 {
                     return View("Lockout");
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToAction(nameof(VerifyAuthenticatorCode), new { returnurl, model.RememberMe });
                 }
                 else
                 {
@@ -357,7 +357,7 @@ namespace Identity_Training_App.Controllers
             {
                 return View(model);
             }
-            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(model.Code, model.RememberMe, rememberClient: true);
+            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(model.Code, model.RememberMe, rememberClient: false);
             if(result.Succeeded)
             {
                 return LocalRedirect(model.ReturnUrl);

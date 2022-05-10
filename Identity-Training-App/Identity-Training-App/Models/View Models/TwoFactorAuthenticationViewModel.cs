@@ -10,6 +10,6 @@ namespace Identity_Training_App.Models.View_Models
         //to register
         public string Token { get; set; }
 
-        public string QRCodeUrl { get; set; }
+        public string? QRCodeUrl { get; set; }
     }
 }
