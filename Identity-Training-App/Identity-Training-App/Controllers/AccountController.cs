@@ -301,6 +301,7 @@ namespace Identity_Training_App.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EnableAuthenticator(TwoFactorAuthenticationViewModel model)
         {
             if (ModelState.IsValid)
@@ -334,6 +335,31 @@ namespace Identity_Training_App.Controllers
             }
             ViewData["ReturnUrl"] = returnUrl;
             return View(new VerifyAuthenticatorVM { ReturnUrl= returnUrl,RememberMe = rememberMe });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyAuthenticatorCode(VerifyAuthenticatorVM model)
+        {
+            model.ReturnUrl = model.ReturnUrl ?? Url.Content("~/");
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(model.Code, model.RememberMe, rememberClient: true);
+            if(result.Succeeded)
+            {
+                return LocalRedirect(model.ReturnUrl);
+            }
+            if(result.IsLockedOut)
+            {
+                return View("Lockout");
+            }
+            else
+            {
+                ModelState.AddModelError(String.Empty, "Invalid code");
+                return View(model);
+            }
         }
     }
 }
