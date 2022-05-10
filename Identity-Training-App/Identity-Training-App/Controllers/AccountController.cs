@@ -332,6 +332,7 @@ namespace Identity_Training_App.Controllers
             {
                 return View("Error");
             }
+            ViewData["ReturnUrl"] = returnUrl;
             return View(new VerifyAuthenticatorVM { ReturnUrl= returnUrl,RememberMe = rememberMe });
         }
     }

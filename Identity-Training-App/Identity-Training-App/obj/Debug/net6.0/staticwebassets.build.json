@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "v2cITeA78AHCET9Sg0ieJJP8tjjSaAm4vchfztMgDZs=",
+  "Hash": "sTTzy0vk8smdzC9C6FK9t5BQstWdQOuLnmHMIDq7kbM=",
   "Source": "Identity-Training-App",
   "BasePath": "_content/Identity-Training-App",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\adria\\Desktop\\dot net\\1\\Identity-Training-App\\Identity-Training-App\\Identity-Training-App\\Identity-Training-App\\wwwroot\\js\\qrcode.js",
+      "SourceId": "Identity-Training-App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adria\\Desktop\\dot net\\1\\Identity-Training-App\\Identity-Training-App\\Identity-Training-App\\Identity-Training-App\\wwwroot\\",
+      "BasePath": "_content/Identity-Training-App",
+      "RelativePath": "js/qrcode.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\qrcode.js"
     },
     {
       "Identity": "C:\\Users\\adria\\Desktop\\dot net\\1\\Identity-Training-App\\Identity-Training-App\\Identity-Training-App\\Identity-Training-App\\wwwroot\\js\\site.js",
