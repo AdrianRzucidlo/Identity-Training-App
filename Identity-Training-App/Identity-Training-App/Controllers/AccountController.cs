@@ -243,6 +243,10 @@ namespace Identity_Training_App.Controllers
                 await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
                 return LocalRedirect(returnurl);
             }
+            if(result.RequiresTwoFactor)
+            {
+                return RedirectToAction("VerifyAuthenticatorCode", new {returnUrl = returnurl });
+            }
             else
             {
                 ViewData["ReturnUrl"] = returnurl;
@@ -313,7 +317,17 @@ namespace Identity_Training_App.Controllers
                     return View(model);
                 }
             }
-            return RedirectToAction("AuthenticatorConfirmation");
+            return RedirectToAction(nameof(AuthenticatorConfirmation));
+        }
+
+        public IActionResult AuthenticatorConfirmation()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe,string returnUrl = null)
+        {
+
         }
     }
 }
