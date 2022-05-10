@@ -324,10 +324,15 @@ namespace Identity_Training_App.Controllers
         {
             return View();
         }
-
+        [HttpGet]
         public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe,string returnUrl = null)
         {
-
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            if(user== null)
+            {
+                return View("Error");
+            }
+            return View(new VerifyAuthenticatorVM { ReturnUrl= returnUrl,RememberMe = rememberMe });
         }
     }
 }
