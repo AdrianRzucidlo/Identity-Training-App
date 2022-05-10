@@ -9,5 +9,7 @@ namespace Identity_Training_App.Models.View_Models
         public string Code { get; set; }
         //to register
         public string Token { get; set; }
+
+        public string QRCodeUrl { get; set; }
     }
 }
