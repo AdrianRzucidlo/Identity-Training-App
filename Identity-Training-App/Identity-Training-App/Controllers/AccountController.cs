@@ -38,10 +38,17 @@ namespace Identity_Training_App.Controllers
         [HttpGet]
         public async Task<IActionResult> Register(string? returnurl = null)
         {
+            if(!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
+                await _roleManager.CreateAsync(new IdentityRole { Name = "User" });
+            }
             ViewData["ReturnUrl"] = returnurl;
             var registerVM = new RegisterVM();
             return View(registerVM);
         }
+
+
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
