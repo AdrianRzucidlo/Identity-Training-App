@@ -1,5 +1,6 @@
 ﻿using Identity_Training_App.Models;
 using Identity_Training_App.Models.View_Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using System.Text.Encodings.Web;
 
 namespace Identity_Training_App.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -25,11 +27,12 @@ namespace Identity_Training_App.Controllers
 
 
 
-        public IActionResult Index()
-        {
-            return View();
+        //public IActionResult Index()
+        //{
+        //    return View();
 
-        }
+        //}
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Register(string? returnurl = null)
         {
@@ -37,7 +40,7 @@ namespace Identity_Training_App.Controllers
             var registerVM = new RegisterVM();
             return View(registerVM);
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterVM model, string? returnurl = null)
@@ -66,6 +69,7 @@ namespace Identity_Training_App.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> ConfirmEmail(string userId,string code)
         {
@@ -98,14 +102,14 @@ namespace Identity_Training_App.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login(string? returnurl=null)
         {
             ViewData["ReturnUrl"] = returnurl;
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult>Login(LoginVM model,string? returnurl=null)
@@ -144,19 +148,19 @@ namespace Identity_Training_App.Controllers
             }
             return View(model);
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult ForgotPasswordConfirm()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgetPasswordVM model)
@@ -183,19 +187,19 @@ namespace Identity_Training_App.Controllers
 
 
         //new password
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult NewPassword(string? code=null)
         {
             return code==null? View("Error"): View();
         }
-
+        [AllowAnonymous]
         public IActionResult ResetPasswordConfirm()
         {
             return View();
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(NewPasswordVM model)
@@ -220,6 +224,7 @@ namespace Identity_Training_App.Controllers
 
 
         //FACEBOOK LOGIN
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider,string returnurl = null)
@@ -228,7 +233,7 @@ namespace Identity_Training_App.Controllers
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> ExternalLoginCallback(string? returnurl = null,string? remoteError = null)
         {
@@ -263,7 +268,7 @@ namespace Identity_Training_App.Controllers
                 return View("ExternalLoginConfirmation", new ExternalLoginConfirmationVM { Email = email , Name = name});
             }
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationVM model,string returnurl = null)
@@ -332,10 +337,12 @@ namespace Identity_Training_App.Controllers
             return RedirectToAction(nameof(AuthenticatorConfirmation));
         }
 
+        [HttpGet]
         public IActionResult AuthenticatorConfirmation()
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe,string returnUrl = null)
         {
