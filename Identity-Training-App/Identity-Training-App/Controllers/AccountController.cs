@@ -342,7 +342,7 @@ namespace Identity_Training_App.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe,string returnUrl = null)
         {
@@ -354,7 +354,7 @@ namespace Identity_Training_App.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View(new VerifyAuthenticatorVM { ReturnUrl= returnUrl,RememberMe = rememberMe });
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyAuthenticatorCode(VerifyAuthenticatorVM model)
