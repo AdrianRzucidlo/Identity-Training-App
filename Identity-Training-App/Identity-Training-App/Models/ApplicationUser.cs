@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Identity_Training_App.Models
 {
@@ -7,5 +8,10 @@ namespace Identity_Training_App.Models
     {
         [Required]
         public string Name { get; set; }
+
+        [NotMapped]
+        public string RoleId { get; set; }
+        [NotMapped]
+        public string Role { get; set; }
     }
 }
