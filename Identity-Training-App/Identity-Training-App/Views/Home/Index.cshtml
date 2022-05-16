@@ -18,5 +18,13 @@
             <a asp-action="EnableAuthenticator" asp-controller="Account">Set up two factor authenticator.</a>
             <br />
         }
+        @if(User.IsInRole("Admin"))
+        {
+            <p> You are admin.</p>
+        }
+        else
+        {
+            <p> You are user. </p>
+        }
     }
 </div>
