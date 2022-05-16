@@ -17,6 +17,10 @@ builder.Services.Configure<IdentityOptions>(opt =>
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(10);
     opt.Lockout.MaxFailedAccessAttempts = 2;
 });
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.AccessDeniedPath = new PathString("/Home/AccessDenied");
+});
 
 builder.Services.AddTransient<IEmailSender, MailJetEmailSender>();
 
