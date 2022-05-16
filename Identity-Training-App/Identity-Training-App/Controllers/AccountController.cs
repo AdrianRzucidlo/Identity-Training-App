@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
@@ -43,8 +44,21 @@ namespace Identity_Training_App.Controllers
                 await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
                 await _roleManager.CreateAsync(new IdentityRole { Name = "User" });
             }
+
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem()
+            {
+                Value = "Admin",
+                Text = "Admin"
+            });
+            listItems.Add(new SelectListItem()
+            {
+                Value = "User",
+                Text = "User"
+            });
+
             ViewData["ReturnUrl"] = returnurl;
-            var registerVM = new RegisterVM();
+            var registerVM = new RegisterVM() { RoleList = listItems };
             return View(registerVM);
         }
 

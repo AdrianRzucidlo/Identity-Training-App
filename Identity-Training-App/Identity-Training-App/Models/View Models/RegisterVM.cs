@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Identity_Training_App.Models.View_Models
 {
@@ -20,5 +21,9 @@ namespace Identity_Training_App.Models.View_Models
 
         [Required]
         public string Name { get; set; }
+
+        public IEnumerable<SelectListItem>RoleList { get; set; }
+
+        public string SelectedRole { get; set; }
     }
 }
