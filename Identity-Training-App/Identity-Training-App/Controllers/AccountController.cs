@@ -81,6 +81,14 @@ namespace Identity_Training_App.Controllers
                 var result = await _userManager.CreateAsync(user,model.Password);
                 if(result.Succeeded)
                 {
+                    if(model.SelectedRole!= null && model.SelectedRole.Length >0 && model.SelectedRole=="Admin")
+                    {
+                        await _userManager.AddToRoleAsync(user,"Admin");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action(nameof(ConfirmEmail), "Account", new { userID = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     await _emailSender.SendEmailAsync(model.Email, "Confirm email - Identity-Training", "Please confirm your email by clicking here" +
@@ -309,6 +317,7 @@ namespace Identity_Training_App.Controllers
                 var result = await _userManager.CreateAsync(user);
                 if(result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "User");
                     result = await _userManager.AddLoginAsync(user, info);
                     if(result.Succeeded)
                     {
