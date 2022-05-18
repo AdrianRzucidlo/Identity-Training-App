@@ -9,9 +9,9 @@ namespace Identity_Training_App.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _usermanager;
-        private readonly RoleManager<IdentityUser> _rolemanager;
+        private readonly RoleManager<IdentityRole> _rolemanager;
 
-        public RolesController(ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityUser> rolemanager)
+        public RolesController(ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> rolemanager)
         {
             _db = db;
             _usermanager = userManager;
