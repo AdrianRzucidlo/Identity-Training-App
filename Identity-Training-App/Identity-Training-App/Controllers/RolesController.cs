@@ -44,6 +44,7 @@ namespace Identity_Training_App.Controllers
             if(await _rolemanager.RoleExistsAsync(roleObj.Name))
             {
                 TempData[SD.Error] = "Role alredy exists.";
+                return RedirectToAction(nameof(Index));
             }
             if(string.IsNullOrEmpty(roleObj.Id))
             {
