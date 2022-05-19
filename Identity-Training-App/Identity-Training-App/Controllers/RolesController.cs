@@ -43,18 +43,26 @@ namespace Identity_Training_App.Controllers
         {
             if(await _rolemanager.RoleExistsAsync(roleObj.Name))
             {
-                //error
+                TempData[SD.Error] = "Role alredy exists.";
             }
             if(string.IsNullOrEmpty(roleObj.Id))
             {
                 await _rolemanager.CreateAsync(new IdentityRole { Name = roleObj.Name});
+                TempData[SD.Success] = "Role created!.";
             }
             else
             {
+
                 var objRoleFromDb = _db.Roles.FirstOrDefault(u=>u.Id == roleObj.Id);
+                if(objRoleFromDb == null)
+                {
+                    TempData[SD.Error] = "Role not found.";
+                    return RedirectToAction(nameof(Index));
+                }
                 objRoleFromDb.Name = roleObj.Name;
                 objRoleFromDb.NormalizedName = roleObj.Name.ToUpper();
                 var result = await _rolemanager.UpdateAsync(objRoleFromDb);
+                TempData[SD.Error] = "Role updated!";
             }
             return RedirectToAction(nameof(Index));
         }
