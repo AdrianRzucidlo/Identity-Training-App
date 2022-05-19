@@ -63,8 +63,29 @@ namespace Identity_Training_App.Controllers
                 objRoleFromDb.Name = roleObj.Name;
                 objRoleFromDb.NormalizedName = roleObj.Name.ToUpper();
                 var result = await _rolemanager.UpdateAsync(objRoleFromDb);
-                TempData[SD.Error] = "Role updated!";
+                TempData[SD.Success] = "Role updated!";
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var roleToDelete = _db.Roles.FirstOrDefault(u=>u.Id==id);
+            if(roleToDelete == null)
+            {
+                TempData[SD.Error] = "Role not found.";
+                return RedirectToAction(nameof(Index));
+            }
+            var userRolesForThisRole = _db.UserRoles.Where(u => u.RoleId == id).Count();
+            if(userRolesForThisRole>0)
+            {
+                TempData[SD.Error] = "Cannot delete this role, since there are users assigned to this role.";
+                return RedirectToAction(nameof(Index));
+            }
+            await _rolemanager.DeleteAsync(roleToDelete);
+            TempData[SD.Success] = "Deleted successfully.";
             return RedirectToAction(nameof(Index));
         }
     }
