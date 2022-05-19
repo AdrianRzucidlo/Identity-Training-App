@@ -37,5 +37,26 @@ namespace Identity_Training_App.Controllers
                 return View(obj);
             }
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(IdentityRole roleObj)
+        {
+            if(await _rolemanager.RoleExistsAsync(roleObj.Name))
+            {
+                //error
+            }
+            if(string.IsNullOrEmpty(roleObj.Id))
+            {
+                await _rolemanager.CreateAsync(new IdentityRole { Name = roleObj.Name});
+            }
+            else
+            {
+                var objRoleFromDb = _db.Roles.FirstOrDefault(u=>u.Id == roleObj.Id);
+                objRoleFromDb.Name = roleObj.Name;
+                objRoleFromDb.NormalizedName = roleObj.Name.ToUpper();
+                var result = await _rolemanager.UpdateAsync(objRoleFromDb);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
