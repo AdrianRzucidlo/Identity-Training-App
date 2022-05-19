@@ -22,5 +22,20 @@ namespace Identity_Training_App.Controllers
             var roles = _db.Roles.ToList();
             return View(roles);
         }
+
+        [HttpGet]
+        public IActionResult Upsert(string id)
+        {
+            if(String.IsNullOrEmpty(id))
+            {
+                return View();
+            }
+            else
+            {
+                //update
+                var obj = _db.Roles.FirstOrDefault(u=>u.Id == id);
+                return View(obj);
+            }
+        }
     }
 }
