@@ -34,5 +34,12 @@ namespace Identity_Training_App.Controllers
             }
             return View(userlist);
         }
+
+        [HttpGet]
+        public IActionResult Edit(string userId)
+        {
+            return Ok();
+        }
+
     }
 }
