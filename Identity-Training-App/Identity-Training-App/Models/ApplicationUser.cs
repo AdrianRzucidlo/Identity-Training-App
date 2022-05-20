@@ -14,9 +14,9 @@ namespace Identity_Training_App.Models
         [Display(Name="Choose a role: ")]
         public string RoleId { get; set; }
         [NotMapped]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         [NotMapped]
-        public IEnumerable<SelectListItem> RoleList { get; set; }
+        public IEnumerable<SelectListItem>? RoleList { get; set; }
     }
 }
