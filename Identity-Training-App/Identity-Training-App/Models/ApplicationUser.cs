@@ -11,6 +11,7 @@ namespace Identity_Training_App.Models
         public string Name { get; set; }
 
         [NotMapped]
+        [Display(Name="Choose a role: ")]
         public string RoleId { get; set; }
         [NotMapped]
         public string Role { get; set; }
