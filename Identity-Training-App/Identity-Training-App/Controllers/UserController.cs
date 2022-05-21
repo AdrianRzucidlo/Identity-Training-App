@@ -136,13 +136,17 @@ namespace Identity_Training_App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string userId)
+        public IActionResult Delete(string userId)
         {
             var user = _db.ApplicationUser.FirstOrDefault(u=>u.Id == userId);
             if(user == null)
             {
-
+                return NotFound();
             }
+            _db.ApplicationUser.Remove(user);
+            _db.SaveChanges();
+            TempData[SD.Success] = "User deleted!";
+            return RedirectToAction(nameof(Index));
         }
     }
 }
