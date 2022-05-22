@@ -151,13 +151,16 @@ namespace Identity_Training_App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> ManagerUserClaims(string userId)
+        [HttpGet]
+        public async Task<IActionResult> ManageUserClaims(string userId)
         {
             var user = await _usermanager.FindByIdAsync(userId);
             if (user == null)
             {
                 return NotFound();
             }
+
+            var existingUserClaims = await _usermanager.GetClaimsAsync(user);
 
             var model = new UserClaimsVM()
             {
@@ -170,10 +173,48 @@ namespace Identity_Training_App.Controllers
                 {
                     ClaimType = claim.Type
                 };
+                if(existingUserClaims.Any(c=>c.Type == claim.Type))
+                {
+                    userClaim.IsSelected = true;
+                }
                 model.userClaims.Add(userClaim);
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManageUserClaims(UserClaimsVM userClaimsVM)
+        {
+            var user = await _usermanager.FindByIdAsync(userClaimsVM.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var claims = await _usermanager.GetClaimsAsync(user);
+            var result = await _usermanager.RemoveClaimsAsync(user,claims);
+
+            if(!result.Succeeded)
+            {
+                TempData[SD.Error] = "Error while updating claims.";
+                return View(userClaimsVM);
+
+            }
+
+            result = await _usermanager.AddClaimsAsync(user, userClaimsVM.userClaims.
+                Where(c => c.IsSelected == true).
+                Select(c => new Claim(c.ClaimType, c.IsSelected.ToString())));
+
+            if(!result.Succeeded)
+            {
+                TempData[SD.Error] = "Error while updating claims.";
+                return View(userClaimsVM);
+            }
+
+            TempData[SD.Success] = "Claims updated successfully.";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

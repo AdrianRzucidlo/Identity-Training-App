@@ -1,6 +1,7 @@
 ﻿@model Identity_Training_App.Models.View_Models.UserClaimsVM
 
-<form method="post">
+<form method="post" >
+    <input asp-for="@Model.UserId" hidden />
     <div class="card">
         <div class="card-header">
             <h2> Manage user claims </h2>
