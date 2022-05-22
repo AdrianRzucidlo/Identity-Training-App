@@ -1,7 +1,9 @@
 ﻿using Identity_Training_App.Data;
 using Identity_Training_App.Models;
+using Identity_Training_App.Models.View_Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Identity_Training_App.Controllers
 {
@@ -147,6 +149,31 @@ namespace Identity_Training_App.Controllers
             _db.SaveChanges();
             TempData[SD.Success] = "User deleted!";
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ManagerUserClaims(string userId)
+        {
+            var user = await _usermanager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var model = new UserClaimsVM()
+            {
+                UserId = userId
+            };
+
+            foreach(Claim claim in ClaimStore.claimsList)
+            {
+                UserClaim userClaim = new UserClaim()
+                {
+                    ClaimType = claim.Type
+                };
+                model.userClaims.Add(userClaim);
+            }
+
+            return View(model);
         }
     }
 }
