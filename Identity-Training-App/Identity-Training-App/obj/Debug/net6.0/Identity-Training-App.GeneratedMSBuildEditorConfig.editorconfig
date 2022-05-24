@@ -15,6 +15,34 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\adria\Desktop\dot net\1\Identity-Training-App\Identity-Training-App\Identity-Training-App\Identity-Training-App
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/AccessChecker/AdminAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzQ2hlY2tlclxBZG1pbkFjY2Vzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/AccessChecker/AdminCreateAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzQ2hlY2tlclxBZG1pbkNyZWF0ZUFjY2Vzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/AccessChecker/AdminCreateEditDeleteAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzQ2hlY2tlclxBZG1pbkNyZWF0ZUVkaXREZWxldGVBY2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/AccessChecker/AdminCreateEditDeleteSuperUserAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzQ2hlY2tlclxBZG1pbkNyZWF0ZUVkaXREZWxldGVTdXBlclVzZXJBY2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/AccessChecker/AllAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzQ2hlY2tlclxBbGxBY2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/AccessChecker/AuthorizedAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzQ2hlY2tlclxBdXRob3JpemVkQWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/AccessChecker/UserAccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzQ2hlY2tlclxVc2VyQWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/adria/Desktop/dot net/1/Identity-Training-App/Identity-Training-App/Identity-Training-App/Identity-Training-App/Views/Account/AuthenticatorConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBdXRoZW50aWNhdG9yQ29uZmlybWF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
