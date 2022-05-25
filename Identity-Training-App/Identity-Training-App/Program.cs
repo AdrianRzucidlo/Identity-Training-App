@@ -30,6 +30,11 @@ builder.Services.AddAuthentication().AddFacebook(options =>
     options.AppId = "xxxxxxxxxxxx";
     options.AppSecret = "xxxxxxxxxxxxxxx";
 });
+
+builder.Services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+});
 // Add services to the container.
 
 // Add services to the container.

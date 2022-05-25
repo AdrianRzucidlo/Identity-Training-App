@@ -21,6 +21,13 @@ namespace Identity_Training_App.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "User,Admin")]
+
+        public IActionResult UserOrAdminAccess()
+        {
+            return View();
+        }
+        [Authorize(Policy ="Admin")]
         public IActionResult AdminAccess()
         {
             return View();
