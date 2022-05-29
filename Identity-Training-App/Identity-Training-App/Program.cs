@@ -1,3 +1,4 @@
+using Identity_Training_App.Authorize;
 using Identity_Training_App.Data;
 using Identity_Training_App.Services;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,7 @@ builder.Services.AddAuthentication().AddFacebook(options =>
 builder.Services.AddAuthorization(opt =>
 {
     opt.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+    opt.AddPolicy("OnlySuperAdminChecker", policy => policy.Requirements.Add(new OnlySuperAdminChecker()));
 });
 // Add services to the container.
 
